@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reina Boutique - Compra Online </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Link Swiper's CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+  <!-- Toastify -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <!-- Include the Dark theme -->
+  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <!-- enlace a css -->
+  <link rel="stylesheet" href="./public/css/styles.css">
+  <!-- favicon de Reina -->
+  <link rel="shortcut icon" href="./public/images/reina-logo.png" type="image/x-icon" class="rounded-corners">
+  <!-- CDN sweetalert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- EmailJS -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript"> emailjs.init('5S7VhwgAky7X1H67R')</script>
+
+</head>
+
+<body>
+
+  <header>
+    <!-- Logo del cliente : Reina Temperley -->
+    <aside>
+      <a href="./index.html"><img src="./public/images/reina-logo.png" alt="reina-logo"></a>
+    </aside>
+    <h1>Reina Temperley</h1>
+    <button id="cesta-carrito"><i class="fas fa-shopping-cart"></i><span id="contador-carrito">0</span></button>
+    <!-- Inicio de Sesion del usuario -->
+    <div id="userInfoDisplay"></div>
+    <button id="loginButton">Iniciar Sesión</button>
+  </header>
+
+  <main id="producto-contenedor">
+
+  </main>
+
+  <div class="modal-contenedor">
+    <div class="modal-carrito">
+      <h3>Carrito</h3>
+      <button id="btn-cerrar-carrito"><i class="fas fa-times-circle"></i></button>
+      <div id="carrito-contenedor">
+
+      </div>
+      <p class="precioProducto">Precio total: $ <span id="precio-total"></span></p>
+      <!-- <p>Producto</p>
+      <p>Precio</p>
+      <p id=cantidad${producto.id}>Cantidad</p>
+      <button class="btn waves-effect waves-ligth boton-eliminar" value="">X</button> -->
+      <button id="btn-vaciar-carrito" class="btn waves-effect waves-ligth">Vaciar Carrito</button>
+      <button id="finalizarCompra" class="btn waves-effect waves-light">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <script src="./data/stock.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/modal.js"></script>
+  <script src="./js/cart.js"></script>
+  <script src="./js/home.js"></script>
+  <script src="./js/index.js"></script>
+  <script src="https://kit.fontawesome.com/df59baf6b8.js" crossorigin="anonymous"></script>
+  <hr>
+
+  <!-- Footer -->
+  <footer class="footer container">
+     
+      <div class="footer-txt">
+          <img src="#" alt="">
+          <div class="links">
+              <ul>
+                  <li><a href="#">Inicio</a></li>
+                  <li><a href="#">Servicios</a></li>
+                  <li><a href="#">Productos</a></li>
+                  <li><a href="#">Contacto</a></li>
+              </ul>
+              <div class="redes">
+                  <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                  <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                  <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+              </div>
+              <p> Copyright 2023 © | Creado por MauGinga </p>
+          </div>
+      </div>
+  </footer>
+
+
+
+</body>
+
+</html>
