@@ -1,13 +1,13 @@
 let carrito = []
 
 const productoContenedor = document.getElementById("producto-contenedor");
-
+// escucho el evento click para agregar un producto
 productoContenedor.addEventListener('click', (e) => {
   if (e.target.classList.contains('agregar')) {
     validarProductoEnCarrito(e.target.id);
   }
 })
-
+// valido que el producto agregado este o no el carrito. Si esta agrego cantidad
 const validarProductoEnCarrito = (id) => {
   const estaRepetido = carrito.some(producto => producto.id == id)
 
@@ -24,7 +24,7 @@ const validarProductoEnCarrito = (id) => {
     actualizarTotalesCarrito(carrito)
   }
 }
-
+//renderizo en el carrito todo los productos con su imagen
 const pintarProductoCarrito = (producto) => {
   const contenedor = document.getElementById('carrito-contenedor')
   const div = document.createElement('div')
@@ -58,14 +58,14 @@ const pintarCarrito = (carrito) => {
     contenedor.appendChild(div)
   });
 }
-
+// eliminar productos del carro
 const eliminarProductoCarrito = (id) => {
   const productoIndex = carrito.findIndex(producto => producto.id == id)
   carrito.splice(productoIndex, 1)
   pintarCarrito(carrito)
   actualizarTotalesCarrito(carrito)
 }
-
+//actualiza las cantidades totales y el costo total
 const actualizarTotalesCarrito = (carrito) => {
   const totalCantidad = carrito.reduce((acc, item) => acc + item.cantidad, 0)
   const totalCompra = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0)
@@ -98,47 +98,12 @@ const cargarCarrito = () => {
     actualizarTotalesCarrito(carrito)
   }
 }
-
-// // Obtener referencia al botón vaciar carrito
-// const btnVaciarCarrito = document.getElementById('btnVaciarCarrito');
-
-// // Agregar evento click al botón
-// btnVaciarCarrito.addEventListener('click', () => {
-//   // Mostrar confirmación al usuario
-//   const confirmacion = confirm('¿Estás seguro de que quieres vaciar el carrito?');
-
-//   if (confirmacion) {
-//     vaciarCarrito();
-//   }
-// });
-
-// // Función para vaciar el carrito
-// const vaciarCarrito = () => {
-//   // Vaciar el arreglo carrito
-//   carrito = [];
-//   // Vaciar el contenido del contenedor en el HTML
-//   const contenedor = document.getElementById('carrito-contenedor');
-//   contenedor.innerHTML = '';
-//   // Actualizar totales del carrito
-//   actualizarTotalesCarrito(carrito);
-//   // Guardar el carrito vacío en el almacenamiento local
-//   guardarCarritoStorage(carrito);
-// };
-
 // Después de cargar el carrito desde el almacenamiento y pintarlo
 cargarCarrito();
 
 // Agregar evento clic al botón "Vaciar Carrito"
 const btnVaciarCarrito = document.getElementById('btn-vaciar-carrito');
 btnVaciarCarrito.addEventListener('click', () => {
-  // const confirmacion = window.confirm('¿Está seguro de que quiere vaciar el carrito?');
-  // if (confirmacion) {
-  //   // Vaciar el carrito y actualizar la interfaz
-  //   carrito = [];
-  //   pintarCarrito(carrito);
-  //   actualizarTotalesCarrito(carrito);
-  //   localStorage.removeItem('carrito'); // Limpiar el almacenamiento local también
-  // }
   // reemplazo la ventana Confirm con un sweetAlert 
   swal.fire({
     title: "¿Está seguro de que quiere vaciar el carrito?",
