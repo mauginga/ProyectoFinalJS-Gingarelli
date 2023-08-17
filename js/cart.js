@@ -1,10 +1,29 @@
+import './login.js';
+
+// Función para verificar si el usuario está loggeado
+const usuarioLoggeado = () => {
+  const storedUsername = sessionStorage.getItem("username");
+  const storedEmail = sessionStorage.getItem("email");
+  return storedUsername && storedEmail;
+}
+
 let carrito = []
 
 const productoContenedor = document.getElementById("producto-contenedor");
 // escucho el evento click para agregar un producto
 productoContenedor.addEventListener('click', (e) => {
   if (e.target.classList.contains('agregar')) {
-    validarProductoEnCarrito(e.target.id);
+    if (usuarioLoggeado()) { // Verificar si el usuario está loggeado
+      validarProductoEnCarrito(e.target.id);
+    } else {
+      Toastify({
+        text: "Debes iniciar sesión para agregar al carrito.",
+        duration: 3000,
+        close: true,
+        gravity: "bottom", // Cambiar la posición del toast según tu preferencia
+        backgroundColor: "linear-gradient(to right, #ff9800, #ff5722)"
+      }).showToast();
+    }
   }
 })
 // valido que el producto agregado este o no el carrito. Si esta agrego cantidad
@@ -12,10 +31,17 @@ const validarProductoEnCarrito = (id) => {
   const estaRepetido = carrito.some(producto => producto.id == id)
 
   if (!estaRepetido) {
-    const producto = productos.find(producto => producto.id == id)
-    carrito.push(producto)
-    pintarProductoCarrito(producto)
-    actualizarTotalesCarrito(carrito)
+    const producto = productos.find(producto => producto.id == id);
+    carrito.push(producto);
+    pintarProductoCarrito(producto);
+    actualizarTotalesCarrito(carrito);
+    Toastify({
+      text: "Producto agregado al carrito.",
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      backgroundColor: "#4caf50"
+    }).showToast();
   } else {
     const producto = carrito.find(producto => producto.id == id)
     const cantidad = document.getElementById(`cantidad${producto.id}`)
@@ -64,6 +90,13 @@ const eliminarProductoCarrito = (id) => {
   carrito.splice(productoIndex, 1)
   pintarCarrito(carrito)
   actualizarTotalesCarrito(carrito)
+  Toastify({
+    text: "Producto eliminado del carrito.",
+    duration: 3000,
+    close: true,
+    gravity: "bottom",
+    backgroundColor: "#f44336"
+  }).showToast();
 }
 //actualiza las cantidades totales y el costo total
 const actualizarTotalesCarrito = (carrito) => {
