@@ -1,1 +1,1 @@
-# Proyecto_Carrito_Gingarelli_V3
+# ProyectoFinalJS_Gingarelli
