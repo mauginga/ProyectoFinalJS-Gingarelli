@@ -65,30 +65,6 @@ productoContenedor.addEventListener('click', (e) => {
   }
 })
 
-// valido que el producto agregado este o no el carrito. Si esta agrego cantidad
-// const validarProductoEnCarrito = (id) => {
-//   const estaRepetido = carrito.some(producto => producto.id == id)
-
-//   if (!estaRepetido) {
-//     const producto = productos.find(producto => producto.id == id);
-//     carrito.push(producto);
-//     pintarProductoCarrito(producto);
-//     actualizarTotalesCarrito(carrito);
-//     Toastify({
-//       text: "Producto agregado al carrito.",
-//       duration: 3000,
-//       close: true,
-//       gravity: "bottom",
-//       backgroundColor: "#4caf50"
-//     }).showToast();
-//   } else {
-//     const producto = carrito.find(producto => producto.id == id)
-//     const cantidad = document.getElementById(`cantidad${producto.id}`)
-//     producto.cantidad ++; // en lugar de incrementar declaro la cantidad 1.
-//     cantidad.innerText = `Cantidad: ${producto.cantidad}`
-//     actualizarTotalesCarrito(carrito)
-//   }
-// }
 // valido que el producto agregado esté o no en el carrito. Si está, agrego cantidad
 const validarProductoEnCarrito = (id) => {
   const productoEnCarrito = carrito.find(producto => producto.id == id);
