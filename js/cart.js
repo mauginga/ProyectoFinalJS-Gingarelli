@@ -66,11 +66,36 @@ productoContenedor.addEventListener('click', (e) => {
 })
 
 // valido que el producto agregado este o no el carrito. Si esta agrego cantidad
-const validarProductoEnCarrito = (id) => {
-  const estaRepetido = carrito.some(producto => producto.id == id)
+// const validarProductoEnCarrito = (id) => {
+//   const estaRepetido = carrito.some(producto => producto.id == id)
 
-  if (!estaRepetido) {
+//   if (!estaRepetido) {
+//     const producto = productos.find(producto => producto.id == id);
+//     carrito.push(producto);
+//     pintarProductoCarrito(producto);
+//     actualizarTotalesCarrito(carrito);
+//     Toastify({
+//       text: "Producto agregado al carrito.",
+//       duration: 3000,
+//       close: true,
+//       gravity: "bottom",
+//       backgroundColor: "#4caf50"
+//     }).showToast();
+//   } else {
+//     const producto = carrito.find(producto => producto.id == id)
+//     const cantidad = document.getElementById(`cantidad${producto.id}`)
+//     producto.cantidad ++; // en lugar de incrementar declaro la cantidad 1.
+//     cantidad.innerText = `Cantidad: ${producto.cantidad}`
+//     actualizarTotalesCarrito(carrito)
+//   }
+// }
+// valido que el producto agregado esté o no en el carrito. Si está, agrego cantidad
+const validarProductoEnCarrito = (id) => {
+  const productoEnCarrito = carrito.find(producto => producto.id == id);
+
+  if (!productoEnCarrito) {
     const producto = productos.find(producto => producto.id == id);
+    producto.cantidad = 1; // Establecer la cantidad a 1 cuando se agrega por primera vez
     carrito.push(producto);
     pintarProductoCarrito(producto);
     actualizarTotalesCarrito(carrito);
@@ -82,13 +107,20 @@ const validarProductoEnCarrito = (id) => {
       backgroundColor: "#4caf50"
     }).showToast();
   } else {
-    const producto = carrito.find(producto => producto.id == id)
-    const cantidad = document.getElementById(`cantidad${producto.id}`)
-    producto.cantidad++
-    cantidad.innerText = `Cantidad: ${producto.cantidad}`
-    actualizarTotalesCarrito(carrito)
+    productoEnCarrito.cantidad++; // Incrementar la cantidad si el producto ya está en el carrito
+    const cantidadElement = document.getElementById(`cantidad${productoEnCarrito.id}`);
+    cantidadElement.innerText = `Cantidad: ${productoEnCarrito.cantidad}`;
+    actualizarTotalesCarrito(carrito);
+    Toastify({
+      text: "Agrego una unidad adicional",
+      duration: 3000,
+      close: true,
+      gravity: "bottom",
+      backgroundColor: "#4caf50"
+    }).showToast();
   }
 }
+
 //renderizo en el carrito todo los productos con su imagen
 const pintarProductoCarrito = (producto) => {
   const contenedor = document.getElementById('carrito-contenedor')
@@ -187,6 +219,7 @@ btnVaciarCarrito.addEventListener('click', () => {
   .then((willVaciar) => {
     if (willVaciar) {
       // Vaciar el carrito y actualizar la interfaz
+      carrito.forEach(producto => producto.cantidad = 1);
       carrito = [];
       pintarCarrito(carrito);
       actualizarTotalesCarrito(carrito);
