@@ -115,6 +115,7 @@ const pintarCarrito = (carrito) => {
     div.classList.add('productoEnCarrito')
 
     div.innerHTML = `
+      <img src=${producto.imagen}>
       <p>${producto.nombre}</p>
       <p>$ ${producto.precio}</p>
       <p id=cantidad${producto.id}>Cantidad: ${producto.cantidad}</p>

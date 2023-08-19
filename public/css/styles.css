@@ -225,3 +225,53 @@ select {
 .redes i:hover {
   color: #747474;
 }
+/* Estilos para pantallas de celular */
+@media (max-width: 767px) {
+  header {
+    padding: 20px 5%;
+  }
+
+  h1 {
+    font-size: 24px;
+  }
+
+  #producto-contenedor {
+    max-width: 100%;
+    margin: 30px auto;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .modal-carrito {
+    min-width: 90%;
+    padding: 15px;
+  }
+
+  .redes i {
+    margin: 0 10px;
+    font-size: 20px;
+  }
+}
+
+/* Estilos para pantallas de iPad */
+@media (min-width: 768px) and (max-width: 1023px) {
+  header {
+    padding: 20px 8%;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  #producto-contenedor {
+    max-width: 80rem;
+    margin: 50px auto;
+  }
+
+  .modal-carrito {
+    min-width: 60%;
+    padding: 20px;
+  }
+}
