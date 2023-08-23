@@ -216,10 +216,10 @@ document.getElementById("finalizarCompra").addEventListener("click", () => {
     if (result.isConfirmed) {
       // Obtener información del usuario y del carrito
       const storedUsername = sessionStorage.getItem("username");
-      const storedEmail = sessionStorage.getItem("email")
+      const storedEmail = sessionStorage.getItem("email");
       const cartItems = carrito.map(producto => `${producto.nombre} (Cantidad: ${producto.cantidad})`);
       const cartItemsText = cartItems.join("\n");
-      const totalCompra = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0)
+      const totalCompra = carrito.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 
       // Lógica para enviar la información a través de EmailJS
       const templateParams = {
@@ -238,13 +238,27 @@ document.getElementById("finalizarCompra").addEventListener("click", () => {
           actualizarTotalesCarrito(carrito);
           localStorage.removeItem('carrito'); // Limpiar el almacenamiento local
 
+          // Mostrar Sweet Alert de éxito
           swal.fire("Compra Finalizada", "Se ha enviado la información de la compra por correo electrónico.", "success");
+          
+          // Realizar solicitud fetch para obtener consejo
+          fetch("https://api.adviceslip.com/advice")
+            .then(response => response.json())
+            .then(data => {
+              // Mostrar el consejo en un Sweet Alert
+              swal.fire("Consejo", data.slip.advice, "info");
+            })
+            .catch(error => {
+              console.error("Error al obtener el consejo:", error);
+            });
         })
         .catch((error) => {
+          // Mostrar Sweet Alert de error
           swal.fire("Error", "Hubo un problema al enviar el correo electrónico.", "error");
         });
     }
   });
 });
+
 
 
